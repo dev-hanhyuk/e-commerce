@@ -72036,7 +72036,8 @@
 	  }, {
 	    key: 'handleAddToWishlist',
 	    value: function handleAddToWishlist() {
-	      if (this.props.auth.user.id) this.props.addProductToWishlist(this.props.product.id, this.props.auth.user.id, 1);
+	      if (this.props.auth.user && this.props.auth.user.id) return this.props.addProductToWishlist(this.props.product.id, this.props.auth.user.id, 1);
+	      return;
 	    }
 	  }, {
 	    key: 'handleSubThumbnailClick',
