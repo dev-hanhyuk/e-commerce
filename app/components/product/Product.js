@@ -18,7 +18,7 @@ class Product extends React.Component {
     }
 
     handleAddToWishlist () {
-      this.props.addProductToWishlist(this.props.product.id, this.props.auth.user.id, 1);
+      if (this.props.auth.user.id) this.props.addProductToWishlist(this.props.product.id, this.props.auth.user.id, 1);
     }
 
     handleSubThumbnailClick (imgUrl) {
@@ -95,7 +95,7 @@ class Product extends React.Component {
                     <SquareButton title="ADD TO CART" leaveStyle={styles.leaveStyle} handleClick={this.handleOrderProduct}/>
                   </div>
                   <div className="col-xs-6">
-                    { this.props.auth.user && this.props.auth.user.id ? <SquareButton title="ADD TO WISHLIST" handleClick={this.handleAddToWishlist}/> : '' }
+                    <SquareButton title="ADD TO WISHLIST" handleClick={this.handleAddToWishlist}/>
                   </div>
                 </div>
 
