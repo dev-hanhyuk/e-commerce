@@ -95,7 +95,7 @@ class Product extends React.Component {
                     <SquareButton title="ADD TO CART" leaveStyle={styles.leaveStyle} handleClick={this.handleOrderProduct}/>
                   </div>
                   <div className="col-xs-6">
-                    <SquareButton title="ADD TO WISHLIST" handleClick={this.handleAddToWishlist}/>
+                    { this.props.auth.user && this.props.auth.user.id ? <SquareButton title="ADD TO WISHLIST" handleClick={this.handleAddToWishlist}/> : '' }
                   </div>
                 </div>
 
