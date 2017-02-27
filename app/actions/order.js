@@ -98,8 +98,8 @@ export const removeOrderFromCart = (orders, user) => dispatch => {
 }
 
 export const removeOrderFromSession = (orders) => dispatch => {
-  const { ordersToCheckOut, selectedOrders } = orders;
-  const newOrdersToCheckOut = _.remove(ordersToCheckOut, (o, i) => selectedOrders.indexOf(i) == -1 );
+  const { cart, selected } = orders;
+  const newOrdersToCheckOut = _.remove(cart, (o, i) => selected.indexOf(i) == -1 );
   dispatch({ type: ORDER_PRODUCT_TO_CART, order: newOrdersToCheckOut });
 }
 

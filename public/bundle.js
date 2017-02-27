@@ -23303,9 +23303,10 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	var store = (0, _redux.createStore)(_reducers2.default, (0, _redux.applyMiddleware)((0, _reduxLogger2.default)(), _reduxThunk2.default));
+	var store = (0, _redux.createStore)(_reducers2.default, (0, _redux.applyMiddleware)(_reduxThunk2.default));
 	
 	exports.default = store;
+	//createLogger(),
 
 /***/ },
 /* 209 */
@@ -34699,11 +34700,11 @@
 	
 	var removeOrderFromSession = exports.removeOrderFromSession = function removeOrderFromSession(orders) {
 	  return function (dispatch) {
-	    var ordersToCheckOut = orders.ordersToCheckOut,
-	        selectedOrders = orders.selectedOrders;
+	    var cart = orders.cart,
+	        selected = orders.selected;
 	
-	    var newOrdersToCheckOut = _lodash2.default.remove(ordersToCheckOut, function (o, i) {
-	      return selectedOrders.indexOf(i) == -1;
+	    var newOrdersToCheckOut = _lodash2.default.remove(cart, function (o, i) {
+	      return selected.indexOf(i) == -1;
 	    });
 	    dispatch({ type: _actions.ORDER_PRODUCT_TO_CART, order: newOrdersToCheckOut });
 	  };
@@ -72319,7 +72320,7 @@
 	
 	      var selectedOrders = orders.selected;
 	      var ordersToRemove = selectedOrders.map(function (k) {
-	        return orders.ordersToCheckOut[k].id;
+	        return orders.cart[k].id;
 	      });
 	      if (auth.user) this.props.removeOrderFromCart(ordersToRemove, auth.user);else if (!auth.user) this.props.removeOrderFromSession(orders);
 	    }
@@ -72332,7 +72333,7 @@
 	
 	      var selectedOrders = orders.selected;
 	      var ordersToMove = selectedOrders.map(function (k) {
-	        return orders.ordersToCheckOut[k];
+	        return orders.cart[k];
 	      });
 	      this.props.moveOrdersToWishlist(ordersToMove, auth.user);
 	    }

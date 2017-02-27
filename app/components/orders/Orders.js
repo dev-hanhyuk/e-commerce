@@ -27,7 +27,7 @@ class Orders extends React.Component {
   handleRemoveOrder () {
     const { orders, auth } = this.props;
     const selectedOrders = orders.selected;
-    const ordersToRemove = selectedOrders.map(k => orders.ordersToCheckOut[k].id);
+    const ordersToRemove = selectedOrders.map(k => orders.cart[k].id);
     if (auth.user) this.props.removeOrderFromCart(ordersToRemove, auth.user);
     else if(!auth.user) this.props.removeOrderFromSession(orders);
 
@@ -36,7 +36,7 @@ class Orders extends React.Component {
   handleMoveToWishlist () {
     const { orders, auth } = this.props;
     const selectedOrders = orders.selected;
-    const ordersToMove = selectedOrders.map(k => orders.ordersToCheckOut[k]);
+    const ordersToMove = selectedOrders.map(k => orders.cart[k]);
     this.props.moveOrdersToWishlist(ordersToMove, auth.user);
   }
 
